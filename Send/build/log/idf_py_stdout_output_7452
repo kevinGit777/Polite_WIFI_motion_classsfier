@@ -1,0 +1,23 @@
+[1/9] Performing build step for 'bootloader'
+[1/1] cmd.exe /C "cd /D D:\esp-idf\Send\build\bootloader\esp-idf\esptool_py && D:\esp-idf\Espressif\python_env\idf5.0_py3.8_env\Scripts\python.exe D:/esp-idf/Espressif/frameworks/esp-idf-v5.0/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x1000 D:/esp-idf/Send/build/bootloader/bootloader.bin"
+Bootloader binary size 0x5420 bytes. 0x1be0 bytes (25%) free.
+[2/7] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/sendBeacon.c.obj
+In file included from D:/esp-idf/Send/main/sendBeacon.c:3:
+D:/esp-idf/Espressif/frameworks/esp-idf-v5.0/components/esp_event/include/esp_event_loop.h:2:2: warning: #warning "esp_event_loop.h is deprecated, please include esp_event.h instead" [-Wcpp]
+    2 | #warning "esp_event_loop.h is deprecated, please include esp_event.h instead"
+      |  ^~~~~~~
+D:/esp-idf/Send/main/sendBeacon.c: In function 'app_main':
+D:/esp-idf/Send/main/sendBeacon.c:90:44: warning: unsigned conversion from 'int' to 'short unsigned int' changes value from '100000' to '34464' [-Woverflow]
+   90 |                         .beacon_interval = 100000
+      |                                            ^~~~~~
+[3/7] Linking C static library esp-idf\main\libmain.a
+[4/7] Generating ld/sections.ld
+[5/7] Linking CXX executable Send.elf
+[6/7] Generating binary image from built executable
+esptool.py v4.4
+Creating esp32s2 image...
+Merged 2 ELF sections
+Successfully created esp32s2 image.
+Generated D:/esp-idf/Send/build/Send.bin
+[7/7] cmd.exe /C "cd /D D:\esp-idf\Send\build\esp-idf\esptool_py && D:\esp-idf\Espressif\python_env\idf5.0_py3.8_env\Scripts\python.exe D:/esp-idf/Espressif/frameworks/esp-idf-v5.0/components/partition_table/check_sizes.py --offset 0x8000 partition --type app D:/esp-idf/Send/build/partition_table/partition-table.bin D:/esp-idf/Send/build/Send.bin"
+Send.bin binary size 0xa0660 bytes. Smallest app partition is 0x100000 bytes. 0x5f9a0 bytes (37%) free.
