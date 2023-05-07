@@ -1,0 +1,15 @@
+dependencies:
+  espressif/pcap:
+    component_hash: 0c7b9f33628e4f2e6c0906207df0b666198bc90127c04002fc9c5b2f010ce949
+    source:
+      service_url: https://api.components.espressif.com/
+      type: service
+    version: 1.0.2
+  idf:
+    component_hash: null
+    source:
+      type: idf
+    version: 5.0.0
+manifest_hash: d97da07a3c7855ac64f94212a22bc466da07f8715a2fc9d2efb4b32f232d9ccd
+target: esp32s2
+version: 1.0.0
