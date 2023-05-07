@@ -51,11 +51,11 @@ void _wifi_csi_cb(void *ctx, wifi_csi_info_t *data)
     // xSemaphoreTake(mutex, portMAX_DELAY);
 
     wifi_csi_info_t d = data[0];
-    char mac[20] = {0};
-    sprintf(mac, "%02X:%02X:%02X:%02X:%02X:%02X", d.mac[0], d.mac[1], d.mac[2], d.mac[3], d.mac[4], d.mac[5]);
+    char src_mac[20] = {0};
+    sprintf(src_mac, "%02X:%02X:%02X:%02X:%02X:%02X", d.mac[0], d.mac[1], d.mac[2], d.mac[3], d.mac[4], d.mac[5]);
     // char dest_mac[20] = {0};
     // sprintf(dest_mac, "%02X:%02X:%02X:%02X:%02X:%02X", d.dmac[0], d.dmac[1], d.dmac[2], d.dmac[3], d.dmac[4], d.dmac[5]);
-    if (_mac_filter(mac) != 0)
+    if (_mac_filter(src_mac) != 0)
     {
         // printf("Invalid\n");
     }
@@ -76,16 +76,21 @@ void _wifi_csi_cb(void *ctx, wifi_csi_info_t *data)
 
         // AMP
         my_ptr = data->buf;
-        printf("MAC is %s\n", mac);
+        printf("MAC is %s\n", src_mac);
         printf("AMP: len is %d \n", data_len);
         char amp[50] = {0};
+        uart_write_bytes(ECHO_UART_PORT_NUM, "[", 1);
+        char timestamp[50] = {0};
+        sprintf(timestamp, "%d\t", d.rx_ctrl.timestamp);
+        uart_write_bytes(ECHO_UART_PORT_NUM, (const char *) amp, strlen(amp));
         for (int i = 0; i < data_len / 2; i++)
         {
-            sprintf(amp, "%f \t\0", sqrt(pow(my_ptr[i * 2], 2) + pow(my_ptr[(i * 2) + 1], 2)));
+            sprintf(amp, "%f, ", sqrt(pow(my_ptr[i * 2], 2) + pow(my_ptr[(i * 2) + 1], 2)));
             uart_write_bytes(ECHO_UART_PORT_NUM, (const char *) amp, strlen(amp));
         }
+        uart_write_bytes(ECHO_UART_PORT_NUM, "]", 1);
         uart_write_bytes(ECHO_UART_PORT_NUM, "\n", 1);
-        printf("\n\n");
+        //printf("\n\n");
 
         // CSI_PHASE
         //  my_ptr = data->buf;
