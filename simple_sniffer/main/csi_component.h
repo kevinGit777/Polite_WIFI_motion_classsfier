@@ -78,11 +78,14 @@ void _wifi_csi_cb(void *ctx, wifi_csi_info_t *data)
         my_ptr = data->buf;
         printf("MAC is %s\n", src_mac);
         printf("AMP: len is %d \n", data_len);
-        char amp[50] = {0};
-        uart_write_bytes(ECHO_UART_PORT_NUM, "[", 1);
+        
+        
         char timestamp[50] = {0};
         sprintf(timestamp, "%d\t", d.rx_ctrl.timestamp);
-        uart_write_bytes(ECHO_UART_PORT_NUM, (const char *) amp, strlen(amp));
+        uart_write_bytes(ECHO_UART_PORT_NUM, (const char *) timestamp, strlen(timestamp));
+        
+        char amp[50] = {0};
+        uart_write_bytes(ECHO_UART_PORT_NUM, "[", 1);
         for (int i = 0; i < data_len / 2; i++)
         {
             sprintf(amp, "%f, ", sqrt(pow(my_ptr[i * 2], 2) + pow(my_ptr[(i * 2) + 1], 2)));
