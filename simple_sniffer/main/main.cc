@@ -38,9 +38,12 @@ void config_print() {
 }
 
 void passive_init() {
+    printf("ENTER passive init\n");
     wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT();
     ESP_ERROR_CHECK(esp_wifi_init(&cfg));
     ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_NULL));
+
+    printf("Start WIFI\n");
     ESP_ERROR_CHECK(esp_wifi_start());
 
     // const wifi_promiscuous_filter_t filt = {
@@ -49,16 +52,20 @@ void passive_init() {
 
     int curChannel = WIFI_CHANNEL;
 
-    esp_wifi_set_promiscuous(true);
+    //printf("SET promis\n");
+    ESP_ERROR_CHECK(esp_wifi_set_promiscuous(true));
     //esp_wifi_set_promiscuous_filter(&filt);
-    esp_wifi_set_channel(curChannel, WIFI_SECOND_CHAN_NONE);
+    //printf("SET channel\n");
+    ESP_ERROR_CHECK(esp_wifi_set_channel(curChannel, WIFI_SECOND_CHAN_NONE));
+    
 }
 
 extern "C" void app_main(void) {
     config_print();
     nvs_init();
-
     passive_init();
-    uart_init();
     csi_init(NULL);
+
+    uart_init();
+    
 }

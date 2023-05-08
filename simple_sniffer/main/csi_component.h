@@ -151,6 +151,8 @@ void nvs_init()
 
 void uart_init()
 {
+    printf("Enter UART_INIT");
+    vTaskDelay(500);
     uart_config_t uart_config = {
         .baud_rate = ECHO_UART_BAUD_RATE,
         .data_bits = UART_DATA_8_BITS,
