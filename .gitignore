@@ -1,2 +1,5 @@
 simple_sniffer/main/build/*
 simple_sniffer/build/*
+Send/build/**
+Send/main/build/*
+
